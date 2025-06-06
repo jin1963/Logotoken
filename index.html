@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>LYDIA Token - เพิ่มเข้า MetaMask</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #3B1D60, #1C0529);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 20px;
+      padding: 12px 28px;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #FFC400;
+    }
+    .logo {
+      width: 128px;
+      height: 128px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="lydia-logo.jpg" alt="Lydia Logo" class="logo">
+  <h1>LYDIA Token</h1>
+  <p>Powering NFT, Staking & Governance on BNB Chain</p>
+
+  <button onclick="addToken()">+ เพิ่ม Lydia Token เข้า MetaMask</button>
+
+  <script>
+    async function addToken() {
+      try {
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: '0x6b088d3859f4ca3ea523da5841f677a8ec83e400',
+              symbol: 'Lydia',
+              decimals: 18,
+              image: window.location.origin + '/lydia-logo.jpg'
+            },
+          },
+        });
+
+        if (wasAdded) {
+          alert('✅ เพิ่มเหรียญ Lydia สำเร็จแล้ว!');
+        } else {
+          alert('❌ ยกเลิกการเพิ่มเหรียญ');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('เกิดข้อผิดพลาด: กรุณาตรวจสอบว่า MetaMask เปิดอยู่');
+      }
+    }
+  </script>
+
+</body>
+</html>
